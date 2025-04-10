@@ -51,3 +51,7 @@ next-env.d.ts
 # Operating system files
 Thumbs.db
 .DS_Store
+
+# Note: The __raw directory is intentionally NOT ignored.
+# We want to include the original raw files in the repository temporarily
+# and will remove them in a future commit once the site is stable.
