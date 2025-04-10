@@ -1,6 +1,70 @@
 # Maria Podobrazhnykh Website
 
-A website for Maria Podobrazhnykh, featuring her portfolio as a UX/UI Designer and sailing trip offerings, deployed on Vercel with minimal changes to the original files.
+This is the portfolio website for Maria Podobrazhnykh, consisting of two main sections:
+- **Main Portfolio Page**: Professional UX/UI design portfolio (converted from Tilda)
+- **Sailing Page**: Information about sailing trips and adventures (converted from Webflow)
+
+## Project Overview
+
+This website is built with Next.js and TypeScript, preserving the original designs from Tilda and Webflow while making them more maintainable.
+
+## Local Development
+
+```bash
+# Install dependencies
+npm install
+
+# Run the development server
+npm run dev
+```
+
+The site will be available at [http://localhost:3000](http://localhost:3000).
+
+## Building for Production
+
+```bash
+# Create a production build
+npm run build
+
+# The build output will be in the 'out' directory
+```
+
+## Deployment to Vercel
+
+The easiest way to deploy this site is using Vercel:
+
+1. Push your code to a Git repository (GitHub, GitLab, or Bitbucket)
+2. Go to [Vercel](https://vercel.com)
+3. Create a new project and import your repository
+4. Use the following settings:
+   - Framework Preset: Next.js
+   - Build Command: `npm run build`
+   - Output Directory: `out`
+5. Deploy
+6. Configure your custom domain (maria-po.com) in the Vercel dashboard
+
+## Project Structure
+
+- `/public/` - Static assets 
+  - `/main/` - Assets from main portfolio page
+  - `/sailing/` - Assets from sailing page
+- `/src/` - Source code
+  - `/app/` - Next.js App Router pages
+  - `/types/` - TypeScript type definitions
+
+## Technology Stack
+
+- Next.js
+- TypeScript
+- HTML/CSS (preserved from original sites)
+
+## Future Improvements
+
+- Component refactoring
+- Performance optimizations
+- Comprehensive TypeScript typing
+- Responsive design improvements
+- Tailwind CSS integration
 
 ## 🌟 About This Site
 
@@ -36,66 +100,7 @@ maria-website/
 └── [Configuration files]
 ```
 
-## 🛠️ Getting Started
-
-### Prerequisites
-
-- Node.js (v14.0.0 or later)
-- npm or yarn
-
-### Running Locally
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/maria-website.git
-   cd maria-website
-   ```
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Start the development server:
-   ```bash
-   npm run dev
-   ```
-
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-## 📝 Pages
-
-### Main Portfolio Page (/)
-
-Original Tilda design with navigation to:
-- Experience section
-- Landing pages section
-- Social media links
-- Sailing page
-
-### Sailing Page (/sailing)
-
-Original Webflow design featuring:
-- Sailing trip options
-- Pricing information
-- Photo galleries
-- Contact information
-
-## 🚢 Deployment
-
-The site is deployed on Vercel at [maria-po.com](https://maria-po.com).
-
-## 🔮 Future Improvements
-
-Future iterations of this website may include:
-
-1. Component refactoring for better maintainability
-2. Performance optimizations
-3. More comprehensive TypeScript typing
-4. Responsive design improvements
-5. Tailwind CSS for styling
-
-## 👩‍💼 About Maria Podobrazhnykh
+## ��‍💼 About Maria Podobrazhnykh
 
 Maria is a UX/UI Designer with over 7 years of experience, combining her artistic background with technical skills to create user-centered designs. When not designing, she organizes sailing trips to various destinations.
 
