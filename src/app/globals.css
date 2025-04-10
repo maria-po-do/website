@@ -1,0 +1,272 @@
+/* Import the original CSS files */
+@import url('/main/tilda-grid-3.0.min.css');
+@import url('/main/tilda-blocks-page58153263.min.css');
+@import url('/sailing/sailing-with-maria.webflow.9139f1e0e.css');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Syne:wght@400;500;600;700&display=swap');
+
+/* Main styles */
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-rgb: 255, 255, 255;
+}
+
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  background-color: rgb(var(--background-rgb));
+  color: rgb(var(--foreground-rgb));
+  font-family: 'Inter', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Custom cursor styles */
+.cursor-dot,
+.cursor-dot-outline {
+  mix-blend-mode: difference;
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  opacity: 0;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.29s ease-in-out, transform 0.29s ease-in-out;
+}
+
+.cursor-dot {
+  z-index: 99999999;
+  width: 10px;
+  height: 10px;
+  background-color: rgba(115, 115, 204, 0);
+  border: solid;
+  border-radius: 50%;
+  border-width: 0px;
+  border-color: #000;
+}
+
+.cursor-dot-outline {
+  z-index: 99999998;
+  width: 13px;
+  height: 13px;
+  background-color: rgba(30, 0, 255, 0.72);
+  border: solid;
+  border-radius: 50%;
+  border-width: 0px;
+  border-color: #000;
+}
+
+/* Tilda-specific styles */
+.t-body {
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+}
+
+.t-records {
+  min-width: 320px;
+}
+
+.main-header {
+  position: relative;
+  height: 420px;
+  background-color: #ffffff;
+}
+
+/* Navigation */
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 30px;
+  font-size: 13px;
+  font-family: 'Inter', Arial, sans-serif;
+}
+
+.nav-left, .nav-right {
+  display: flex;
+  gap: 30px;
+}
+
+.nav-link {
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+
+.nav-link:hover {
+  opacity: 0.7;
+}
+
+/* Profile section */
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.profile-avatar {
+  margin-top: 50px;
+}
+
+.profile-title {
+  margin-top: 20px;
+  font-size: 13px;
+  font-family: 'Inter', Arial, sans-serif;
+  opacity: 0.5;
+}
+
+.profile-name {
+  font-size: 70px;
+  font-family: 'Syne', Arial, sans-serif;
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+  position: relative;
+  margin: 40px 0 0 0;
+}
+
+.star-decoration {
+  position: relative;
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.profile-description {
+  max-width: 455px;
+  margin: 30px auto 0;
+  font-size: 13px;
+  line-height: 1.55;
+  opacity: 0.5;
+  text-align: center;
+}
+
+/* Portfolio section */
+.portfolio-section {
+  padding: 60px 0;
+}
+
+.portfolio-heading {
+  font-size: 40px;
+  font-family: 'Syne', Arial, sans-serif;
+  font-weight: 600;
+  margin-bottom: 40px;
+  text-align: left;
+  padding-left: 30px;
+}
+
+.portfolio-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  padding: 0 30px;
+}
+
+.portfolio-item {
+  background-color: #f8f8f8;
+  border-radius: 10px;
+  overflow: hidden;
+  width: calc(33.33% - 20px);
+  padding-bottom: 30px;
+}
+
+.portfolio-item-image {
+  width: 100%;
+  height: 250px;
+  position: relative;
+}
+
+.portfolio-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.portfolio-item-title {
+  font-size: 24px;
+  font-family: 'Syne', Arial, sans-serif;
+  font-weight: 600;
+  margin: 20px 20px 10px;
+}
+
+.portfolio-item-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 20px 15px;
+}
+
+.portfolio-tag {
+  background-color: #eee;
+  padding: 5px 15px;
+  border-radius: 30px;
+  font-size: 12px;
+}
+
+.portfolio-item-description {
+  margin: 0 20px;
+  font-size: 14px;
+  line-height: 1.5;
+  opacity: 0.7;
+}
+
+/* Sailing CTA */
+.sailing-cta {
+  text-align: center;
+  padding: 60px 0;
+}
+
+.sailing-button {
+  background-color: #3737FF;
+  color: white;
+  padding: 20px 40px;
+  border-radius: 8px;
+  font-family: 'Syne', Arial, sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.sailing-button:hover {
+  background-color: #2727CF;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .profile-name {
+    font-size: 50px;
+  }
+  
+  .portfolio-item {
+    width: calc(50% - 15px);
+  }
+  
+  .nav-right {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-name {
+    font-size: 34px;
+  }
+  
+  .portfolio-item {
+    width: 100%;
+  }
+  
+  .top-nav {
+    font-size: 12px;
+  }
+}

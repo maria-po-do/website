@@ -1,0 +1,51 @@
+# Maria Podobrazhnykh Website
+
+This file contains project-specific rules and guidelines for the codebase.
+
+## Project Overview
+- **Main Portfolio Page**: Professional UX/UI design portfolio (originally from Tilda)
+- **Sailing Page**: Information about sailing trips and adventures (originally from Webflow)
+
+## Implementation Approach
+- Maintain original assets and functionality
+- Use Next.js framework with TypeScript
+- Follow "minimal changes" approach
+- Preserve design while adding type safety
+- Static export for optimal deployment
+
+## Directory Structure
+- `/public/` - Static assets
+  - `/main/` - Assets from main portfolio page
+  - `/sailing/` - Assets from sailing page
+- `/src/` - Source code
+  - `/app/` - Next.js App Router pages
+  - `/types/` - TypeScript type definitions
+- `/out/` - Static export output (after build)
+
+## Development Guidelines
+- Preserve original styling and functionality
+- HTML converted to TSX with minimal modifications
+- Static export for Vercel deployment
+- Keep original asset paths consistent
+
+## Technical Stack
+- Next.js (with static export)
+- TypeScript
+- HTML/CSS (original from Tilda/Webflow)
+- Vercel or any static hosting service for deployment
+
+## Building and Deployment
+- Run `npm run build` to generate static files in the `/out` directory
+- Deploy the `/out` directory to any static hosting service
+- For Vercel: connect GitHub repository and configure build settings
+- Set output directory to `out` in Vercel project settings
+
+## Future Considerations
+- Component refactoring
+- Performance optimizations
+- Comprehensive TypeScript typing
+- Responsive design improvements
+- Tailwind CSS integration
+
+## Note About Raw Files
+The `__raw` directory contains original source files and is temporarily kept in the repo for reference. 

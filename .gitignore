@@ -1,0 +1,57 @@
+# Project reference files
+/temp
+main-reference.html
+sailing-reference.html
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env*.local
+.env
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# IDE / editors
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Optional npm cache directory
+.npm
+
+# Operating system files
+Thumbs.db
+.DS_Store
+
+# Note: The __raw directory is intentionally NOT ignored.
+# We want to include the original raw files in the repository temporarily
+# and will remove them in a future commit once the site is stable.
