@@ -4,15 +4,17 @@ export default function Nav(): React.JSX.Element {
   return (
     <nav className="top-nav">
       <div className="nav-left">
-        <a href="#experience" className="nav-link">EXPERIENCE</a>
+        <a href="#experience" className="nav-link">
+          Experience
+        </a>
         <a href="#landing-pages" className="nav-link">
-          LANDING<br/>PAGES
+          Landing pages
         </a>
         <a href="https://www.notion.so/podobrazhnykh/Hi-I-m-Mary-486614a0cb6741d3807e6519f9c29b69?pvs=4" 
            target="_blank" 
            rel="noreferrer noopener" 
            className="nav-link">
-          NOTION
+          Notion
         </a>
       </div>
       <div className="nav-right">
@@ -20,21 +22,23 @@ export default function Nav(): React.JSX.Element {
            target="_blank" 
            rel="noreferrer noopener" 
            className="nav-link">
-          LINKEDIN
+          LinkedIn
         </a>
         <a href="https://t.me/mary_po" 
            target="_blank" 
            rel="noreferrer noopener" 
            className="nav-link">
-          TELEGRAM
+          Telegram
         </a>
-        <a href="https://www.instagram.com/mariapodobrazhnykh/" 
+        <a href="https://www.instagram.com/mariapodobrazhnykh/profilecard/?igsh=MWh1bDdyN2Fsa3MzOQ==" 
            target="_blank" 
            rel="noreferrer noopener" 
            className="nav-link">
-          INSTAGRAM
+          Instagram
         </a>
-        <a href="/" className="nav-link">RU</a>
+        <a href="/" className="nav-link">
+          Ru
+        </a>
       </div>
     </nav>
   );

@@ -7,32 +7,27 @@ export default function Cursor(): React.JSX.Element {
     
     if (!dot || !outline) return;
     
-    let cursorVisible = false;
+    let cursorVisible = true;
     let cursorEnlarged = false;
     
-    const endX = window.innerWidth / 2;
-    const endY = window.innerHeight / 2;
-    
+    const delay = 7;
     let _x = 0;
     let _y = 0;
-    
-    const delay = 8; // Cursor delay
+    let endX = window.innerWidth / 2;
+    let endY = window.innerHeight / 2;
     
     // Mouse move event
     document.addEventListener('mousemove', e => {
       cursorVisible = true;
       
+      endX = e.clientX;
+      endY = e.clientY;
+      
       dot.style.opacity = '1';
+      dot.style.top = `${endY}px`;
+      dot.style.left = `${endX}px`;
+      
       outline.style.opacity = '1';
-      
-      dot.style.top = `${e.clientY}px`;
-      dot.style.left = `${e.clientX}px`;
-      
-      _x += (e.clientX - _x) / delay;
-      _y += (e.clientY - _y) / delay;
-      
-      outline.style.top = `${_y}px`;
-      outline.style.left = `${_x}px`;
     });
     
     // Links hover effects
@@ -71,7 +66,7 @@ export default function Cursor(): React.JSX.Element {
     });
     
     document.addEventListener('mouseleave', () => {
-      cursorVisible = false;
+      cursorVisible = true;
       dot.style.opacity = '0';
       outline.style.opacity = '0';
     });

@@ -78,9 +78,3 @@ body * {
 .t-records.t-records_visible {
   opacity: 1;
 }
-
-@media screen and (min-width: 980px) {
-  .t-records {
-    opacity: 0;
-  }
-} 
