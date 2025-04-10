@@ -1,0 +1,69 @@
+/* Main page styles */
+body {
+  font-family: 'Inter', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.main-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  width: 100%;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+/* Import component styles */
+@import url('./components/styles.css');
+
+/* Additional elements */
+.section-marker {
+  height: 50px;
+  width: 100%;
+}
+
+/* White background wrapper */
+.white-bg {
+  position: relative;
+  background-color: #ffffff;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Portfolio section */
+.portfolio-section {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 50px 20px;
+}
+
+.portfolio-heading {
+  font-size: 30px;
+  font-family: 'Syne', Arial, sans-serif;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.portfolio-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+  .portfolio-items {
+    grid-template-columns: 1fr;
+  }
+} 
