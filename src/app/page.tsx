@@ -12,6 +12,106 @@ export default function HomePage(): React.JSX.Element {
     <div className="t-body">
       <Cursor />
       
+      {/* Overlay placeholder */}
+      <div style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        backgroundColor: '#ffffff',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        zIndex: 9999,
+        padding: '2rem',
+        textAlign: 'center',
+        fontSize: '1.5rem',
+        fontFamily: "'Inter', Arial, sans-serif"
+      }}>
+        <h1 style={{ 
+          marginBottom: '2rem', 
+          fontSize: '70px', 
+          fontWeight: 600,
+          letterSpacing: '-0.5px',
+          color: '#000',
+          fontFamily: "'Syne', Arial, sans-serif",
+          lineHeight: 1
+        }}>
+          Website Under Construction
+        </h1>
+        <p style={{ 
+          maxWidth: '455px', 
+          lineHeight: 1.55, 
+          marginBottom: '2rem',
+          color: '#000',
+          opacity: 0.5,
+          fontSize: '13px',
+          fontFamily: "'Inter', Arial, sans-serif"
+        }}>
+          Thank you for your interest! This website is currently being developed.
+        </p>
+        <p style={{ 
+          maxWidth: '455px', 
+          lineHeight: 1.55, 
+          marginBottom: '3rem',
+          color: '#000',
+          opacity: 0.5,
+          fontSize: '13px',
+          fontFamily: "'Inter', Arial, sans-serif"
+        }}>
+          You can view all my work on my current website at <a href="https://podobrazhnykhmaria.ru" style={{ color: '#3737FF', textDecoration: 'underline' }}>podobrazhnykhmaria.ru</a>
+        </p>
+        
+        <div style={{
+          display: 'flex',
+          gap: '20px',
+          marginBottom: '2.5rem'
+        }}>
+          <a href="https://podobrazhnykhmaria.ru" style={{
+            display: 'inline-block',
+            padding: '20px 40px',
+            backgroundColor: '#3737FF',
+            color: 'white',
+            textDecoration: 'none',
+            borderRadius: '8px',
+            fontWeight: 600,
+            fontSize: '16px',
+            transition: 'background-color 0.3s',
+            fontFamily: "'Syne', Arial, sans-serif"
+          }}>
+            Old site
+          </a>
+          
+          <a href="https://maria-po.com/sailing" style={{
+            display: 'inline-block',
+            padding: '20px 40px',
+            backgroundColor: '#fff',
+            color: '#3737FF',
+            textDecoration: 'none',
+            borderRadius: '8px',
+            fontWeight: 600,
+            fontSize: '16px',
+            transition: 'all 0.3s',
+            border: '2px solid #3737FF',
+            fontFamily: "'Syne', Arial, sans-serif"
+          }}>
+            Sailing
+          </a>
+        </div>
+        
+        <p style={{ 
+          fontSize: '13px', 
+          opacity: 0.5,
+          color: '#000',
+          fontFamily: "'Inter', Arial, sans-serif",
+          lineHeight: 1.55
+        }}>
+          Please check back soon for updates!
+        </p>
+      </div>
+      
       <div id="allrecords" className="t-records">
         <div className="main-header">
           <Nav />
