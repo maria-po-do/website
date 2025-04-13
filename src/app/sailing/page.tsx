@@ -9,8 +9,7 @@ export default function SailingPage(): React.JSX.Element {
     const scripts: string[] = [
       '/sailing/jquery-3.5.1.min.dc5e7f18c8.js',
       '/sailing/webflow.schunk.4a394eb5af8156f2.js',
-      '/sailing/webflow.fa131e2e.722efe03a47a343a.js',
-      '/sailing/gsap.min.js'
+      '/sailing/webflow.fa131e2e.722efe03a47a343a.js'
     ];
     
     const loadedScripts: HTMLScriptElement[] = [];
@@ -23,40 +22,22 @@ export default function SailingPage(): React.JSX.Element {
       loadedScripts.push(script);
     });
     
-    // Initialize cursor effect
-    const cursorScript = document.createElement('script');
-    cursorScript.textContent = `
-      document.addEventListener('DOMContentLoaded', function() {
-        const cursorElement = document.createElement('div');
-        cursorElement.classList.add('cursor');
-        document.body.appendChild(cursorElement);
-
-        if (typeof gsap !== 'undefined') {
-          gsap.set(".cursor", { xPercent: -50, yPercent: -50 });
-          let xTo = gsap.quickTo(".cursor", "x", { duration: 0.6, ease: "power3" });
-          let yTo = gsap.quickTo(".cursor", "y", { duration: 0.6, ease: "power3" });
-          window.addEventListener("mousemove", e => {
-            xTo(e.clientX);
-            yTo(e.clientY);
-          });
-          
-          // Cursor animations on hover
-          document.querySelectorAll('.nav-link-2, .paragraph2').forEach(item => {
-            item.addEventListener('mouseenter', () => {
-              gsap.to(".cursor", { scale: 3, opacity: 0.1, duration: 0.2 });
-            });
-            item.addEventListener('mouseleave', () => {
-              gsap.to(".cursor", { scale: 1, opacity: 1, duration: 0.2 });
-            });
-          });
-        }
-      });
-    `;
-    document.body.appendChild(cursorScript);
-    
-    // Add custom styles
+    // Добавляем стили для курсора
     const styleScript = document.createElement('style');
     styleScript.textContent = `
+      .cursor {
+        position: fixed;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: red;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        transition: transform 0.1s;
+        opacity: 1;
+      }
+      
       .image-g {
         transition: transform 0.3s ease;
       }
@@ -66,10 +47,60 @@ export default function SailingPage(): React.JSX.Element {
       }
       
       body, a, * {
-        cursor: default !important;
+        cursor: none !important;
       }
     `;
     document.head.appendChild(styleScript);
+    
+    // Создаем элемент курсора, если его нет
+    let cursorElement = document.querySelector('.cursor');
+    if (!cursorElement) {
+      cursorElement = document.createElement('div');
+      cursorElement.classList.add('cursor');
+      document.body.appendChild(cursorElement);
+    }
+    
+    // Инициализация следования курсора за мышью
+    const mouseMoveHandler = (e: Event) => {
+      const mouseEvent = e as MouseEvent;
+      if (cursorElement) {
+        cursorElement.setAttribute('style', `
+          transform: translate(-50%, -50%) translate(${mouseEvent.clientX}px, ${mouseEvent.clientY}px);
+        `);
+      }
+    };
+    
+    // Загрузка GSAP
+    const gsapScript = document.createElement('script');
+    gsapScript.src = '/sailing/gsap.min.js';
+    gsapScript.onload = function() {
+      // Добавляем обработчик движения мыши
+      window.addEventListener('mousemove', mouseMoveHandler);
+      
+      // Курсор увеличивается при наведении на элементы
+      document.querySelectorAll('.nav-link-2, .paragraph2').forEach(item => {
+        item.addEventListener('mouseenter', (e: Event) => {
+          const mouseEvent = e as MouseEvent;
+          if (cursorElement) {
+            cursorElement.setAttribute('style', `
+              transform: translate(-50%, -50%) translate(${mouseEvent.clientX}px, ${mouseEvent.clientY}px) scale(3);
+              opacity: 0.1;
+            `);
+          }
+        });
+        
+        item.addEventListener('mouseleave', (e: Event) => {
+          const mouseEvent = e as MouseEvent;
+          if (cursorElement) {
+            cursorElement.setAttribute('style', `
+              transform: translate(-50%, -50%) translate(${mouseEvent.clientX}px, ${mouseEvent.clientY}px) scale(1);
+              opacity: 1;
+            `);
+          }
+        });
+      });
+    };
+    document.body.appendChild(gsapScript);
     
     return () => {
       // Clean up scripts when component unmounts
@@ -78,12 +109,14 @@ export default function SailingPage(): React.JSX.Element {
           document.body.removeChild(script);
         }
       });
-      if (document.body.contains(cursorScript)) {
-        document.body.removeChild(cursorScript);
-      }
       if (document.head.contains(styleScript)) {
         document.head.removeChild(styleScript);
       }
+      if (document.body.contains(gsapScript)) {
+        document.body.removeChild(gsapScript);
+      }
+      // Удаляем слушатель событий
+      window.removeEventListener('mousemove', mouseMoveHandler);
     };
   }, []);
   
