@@ -44,49 +44,54 @@ export default function SailingPage(): React.JSX.Element {
       }
       
       body, a, * {
-        cursor: default !important;
+        cursor: none !important;
       }
     `;
     document.head.appendChild(styleScript);
     
-    // Загружаем GSAP
+    // Создаем элемент курсора
+    const cursorElement = document.createElement('div');
+    cursorElement.classList.add('cursor');
+    document.body.appendChild(cursorElement);
+    
+    // Загружаем GSAP и инициализируем курсор
     const gsapScript = document.createElement('script');
     gsapScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js';
-    document.body.appendChild(gsapScript);
-    
-    // Инициализируем курсор после загрузки GSAP
     gsapScript.onload = function() {
-      const cursorScript = document.createElement('script');
-      cursorScript.setAttribute('data-cursor-script', 'true');
-      cursorScript.textContent = `
-        document.addEventListener('DOMContentLoaded', function() {
-          const cursorElement = document.createElement('div');
-          cursorElement.classList.add('cursor');
-          document.body.appendChild(cursorElement);
+      // Доступ к gsap через window
+      const gsap = (window as any).gsap;
 
-          gsap.set(".cursor", { xPercent: -50, yPercent: -50 });
+      // Установка курсора
+      gsap.set(".cursor", { xPercent: -50, yPercent: -50 });
 
-          let xTo = gsap.quickTo(".cursor", "x", { duration: 0.6, ease: "power3" });
-          let yTo = gsap.quickTo(".cursor", "y", { duration: 0.6, ease: "power3" });
+      // Создаем функции для плавного перемещения
+      let xTo = gsap.quickTo(".cursor", "x", { duration: 0.6, ease: "power3" });
+      let yTo = gsap.quickTo(".cursor", "y", { duration: 0.6, ease: "power3" });
 
-          window.addEventListener("mousemove", e => {
-            xTo(e.clientX);
-            yTo(e.clientY);
-          });
-            
-          // Увеличение и прозрачность курсора при наведении на навигацию
-          document.querySelectorAll('.nav-link-2, .paragraph2').forEach(item => {
-            item.addEventListener('mouseenter', () => {
-              gsap.to(".cursor", { scale: 3, opacity: 0.1, duration: 0.2 });
-            });
-            item.addEventListener('mouseleave', () => {
-              gsap.to(".cursor", { scale: 1, opacity: 1, duration: 0.2 });
-            });
-          });
+      // Добавляем обработчик движения мыши
+      const mouseMoveHandler = (e: MouseEvent) => {
+        xTo(e.clientX);
+        yTo(e.clientY);
+      };
+      
+      window.addEventListener("mousemove", mouseMoveHandler);
+      
+      // Увеличение и прозрачность курсора при наведении на элементы
+      document.querySelectorAll('.nav-link-2, .paragraph2').forEach(item => {
+        item.addEventListener('mouseenter', () => {
+          gsap.to(".cursor", { scale: 3, opacity: 0.1, duration: 0.2 });
         });
-      `;
-      document.body.appendChild(cursorScript);
+        
+        item.addEventListener('mouseleave', () => {
+          gsap.to(".cursor", { scale: 1, opacity: 1, duration: 0.2 });
+        });
+      });
+      
+      // Сохраняем ссылку на обработчик для последующей очистки
+      (window as any).cursorMoveHandler = mouseMoveHandler;
     };
+    
+    document.body.appendChild(gsapScript);
     
     return () => {
       // Clean up scripts when component unmounts
@@ -95,23 +100,31 @@ export default function SailingPage(): React.JSX.Element {
           document.body.removeChild(script);
         }
       });
+      
+      // Удаляем обработчик mousemove если он существует
+      if ((window as any).cursorMoveHandler) {
+        window.removeEventListener('mousemove', (window as any).cursorMoveHandler);
+        delete (window as any).cursorMoveHandler;
+      }
+      
+      // Удаляем курсор
+      const cursor = document.querySelector('.cursor');
+      if (cursor) {
+        cursor.remove();
+      }
+      
       if (document.head.contains(styleScript)) {
         document.head.removeChild(styleScript);
       }
+      
       if (document.body.contains(gsapScript)) {
         document.body.removeChild(gsapScript);
-      }
-      // Удаляем скрипт курсора если он есть
-      const cursorScript = document.querySelector('script[data-cursor-script]');
-      if (cursorScript) {
-        cursorScript.remove();
       }
     };
   }, []);
   
   return (
     <div className="body">
-      <div className="cursor"></div>
       <section className="section-2">
         <div className="w-layout-blockcontainer container-4 w-container">
           <div className="navbar-3 w-nav">
