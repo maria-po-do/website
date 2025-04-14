@@ -22,17 +22,38 @@ export default function SailingPage(): React.JSX.Element {
       loadedScripts.push(script);
     });
     
-    // Добавляем стили для курсора и других элементов
+    // Добавляем стили для курсора 
     const styleScript = document.createElement('style');
     styleScript.textContent = `
+      .cursor-container {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 9999;
+      }
+      
       .cursor {
         position: fixed;
+        left: 0;
+        top: 0;
         width: 20px;
         height: 20px;
+        margin-left: -10px;
+        margin-top: -10px;
         border-radius: 50%;
         background-color: red;
         pointer-events: none;
         z-index: 9999;
+        mix-blend-mode: difference;
+        transition: transform 0.2s ease;
+      }
+      
+      .cursor--hover {
+        transform: scale(3);
+        opacity: 0.5;
       }
       
       .image-g {
@@ -49,76 +70,85 @@ export default function SailingPage(): React.JSX.Element {
     `;
     document.head.appendChild(styleScript);
     
-    // Создаем элемент курсора
-    const cursorElement = document.createElement('div');
-    cursorElement.classList.add('cursor');
-    document.body.appendChild(cursorElement);
+    // Создаем контейнер для курсора
+    const cursorContainer = document.createElement('div');
+    cursorContainer.className = 'cursor-container';
+    document.body.appendChild(cursorContainer);
     
-    // Загружаем GSAP и инициализируем курсор
-    const gsapScript = document.createElement('script');
-    gsapScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js';
-    gsapScript.onload = function() {
-      // Доступ к gsap через window
-      const gsap = (window as any).gsap;
-
-      // Установка курсора
-      gsap.set(".cursor", { xPercent: -50, yPercent: -50 });
-
-      // Создаем функции для плавного перемещения
-      let xTo = gsap.quickTo(".cursor", "x", { duration: 0.6, ease: "power3" });
-      let yTo = gsap.quickTo(".cursor", "y", { duration: 0.6, ease: "power3" });
-
-      // Добавляем обработчик движения мыши
-      const mouseMoveHandler = (e: MouseEvent) => {
-        xTo(e.clientX);
-        yTo(e.clientY);
-      };
+    // Создаем сам курсор
+    const cursor = document.createElement('div');
+    cursor.className = 'cursor';
+    cursorContainer.appendChild(cursor);
+    
+    // Функция обновления позиции курсора
+    let cursorX = 0;
+    let cursorY = 0;
+    let currentX = 0;
+    let currentY = 0;
+    
+    const updateCursor = () => {
+      const diffX = cursorX - currentX;
+      const diffY = cursorY - currentY;
       
-      window.addEventListener("mousemove", mouseMoveHandler);
+      currentX += diffX * 0.1;
+      currentY += diffY * 0.1;
       
-      // Увеличение и прозрачность курсора при наведении на элементы
-      document.querySelectorAll('.nav-link-2, .paragraph2').forEach(item => {
-        item.addEventListener('mouseenter', () => {
-          gsap.to(".cursor", { scale: 3, opacity: 0.1, duration: 0.2 });
-        });
-        
-        item.addEventListener('mouseleave', () => {
-          gsap.to(".cursor", { scale: 1, opacity: 1, duration: 0.2 });
-        });
-      });
+      cursor.style.left = currentX + 'px';
+      cursor.style.top = currentY + 'px';
       
-      // Сохраняем ссылку на обработчик для последующей очистки
-      (window as any).cursorMoveHandler = mouseMoveHandler;
+      requestAnimationFrame(updateCursor);
     };
     
-    document.body.appendChild(gsapScript);
+    // Запускаем анимацию
+    updateCursor();
+    
+    // Слушаем движение мыши
+    const onMouseMove = (e: MouseEvent) => {
+      cursorX = e.clientX;
+      cursorY = e.clientY;
+    };
+    
+    document.addEventListener('mousemove', onMouseMove);
+    
+    // Обработка наведения на интерактивные элементы
+    const handleMouseEnter = () => {
+      cursor.classList.add('cursor--hover');
+    };
+    
+    const handleMouseLeave = () => {
+      cursor.classList.remove('cursor--hover');
+    };
+    
+    // Добавляем обработчики для интерактивных элементов
+    const interactiveElements = document.querySelectorAll('a, .nav-link-2, .paragraph2, .button, .w-button');
+    interactiveElements.forEach(el => {
+      el.addEventListener('mouseenter', handleMouseEnter);
+      el.addEventListener('mouseleave', handleMouseLeave);
+    });
     
     return () => {
-      // Clean up scripts when component unmounts
+      // Удаляем все созданные элементы и обработчики
+      if (cursorContainer && cursorContainer.parentNode) {
+        cursorContainer.parentNode.removeChild(cursorContainer);
+      }
+      
+      document.removeEventListener('mousemove', onMouseMove);
+      
+      interactiveElements.forEach(el => {
+        el.removeEventListener('mouseenter', handleMouseEnter);
+        el.removeEventListener('mouseleave', handleMouseLeave);
+      });
+      
+      // Удаляем скрипты
       loadedScripts.forEach(script => {
         if (document.body.contains(script)) {
           document.body.removeChild(script);
         }
       });
       
-      // Удаляем обработчик mousemove если он существует
-      if ((window as any).cursorMoveHandler) {
-        window.removeEventListener('mousemove', (window as any).cursorMoveHandler);
-        delete (window as any).cursorMoveHandler;
-      }
-      
-      // Удаляем курсор
-      const cursor = document.querySelector('.cursor');
-      if (cursor) {
-        cursor.remove();
-      }
-      
+      // Удаляем стили
       if (document.head.contains(styleScript)) {
         document.head.removeChild(styleScript);
-      }
-      
-      if (document.body.contains(gsapScript)) {
-        document.body.removeChild(gsapScript);
       }
     };
   }, []);
