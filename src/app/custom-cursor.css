@@ -40,15 +40,15 @@ body * {
 
 /* Default cursor */
 #cursor .default {
-  width: 10px;
-  height: 10px;
+  width: 15px;
+  height: 15px;
   position: absolute;
   background-color: var(--cursor-color);
   border-radius: 50%;
   mix-blend-mode: difference;
   transform: translate3d(-50%, -50%, 0);
   opacity: 0;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.15s ease;
 }
 
 #cursor .default.active {
@@ -60,7 +60,7 @@ body * {
   position: absolute;
   transform: translate3d(-50%, -50%, 0);
   opacity: 0;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition: opacity 0.15s ease, transform 0.15s ease;
   pointer-events: none;
 }
 
@@ -73,7 +73,7 @@ body * {
   position: absolute;
   transform: translate3d(-50%, -50%, 0);
   opacity: 0;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition: opacity 0.15s ease, transform 0.15s ease;
 }
 
 #cursor .return.active {
@@ -82,8 +82,8 @@ body * {
 
 /* Общие стили для круглых фонов */
 .circle-bg {
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -91,7 +91,7 @@ body * {
   background-color: var(--cursor-color);
   box-shadow: 0 2px 10px rgba(255, 90, 75, 0.3);
   transform: scale(1);
-  transition: transform 0.2s ease;
+  transition: transform 0.15s ease;
 }
 
 .circle-bg:hover {
