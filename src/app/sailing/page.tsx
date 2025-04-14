@@ -57,7 +57,6 @@ export default function SailingPage(): React.JSX.Element {
       <section className="section-2">
         <div className="w-layout-blockcontainer container-4 w-container">
           <div className="navbar-3 w-nav">
-            <Link href="/" className="nav-link-3 w-nav-link">Back to Portfolio</Link>
             <a href="#" className="nav-link-3 w-nav-link">Sailing with Maria</a>
             <nav role="navigation" className="nav-menu w-nav-menu">
               <a href="#alltrips" className="nav-link-2 w-nav-link">All Trips</a>
@@ -240,10 +239,6 @@ export default function SailingPage(): React.JSX.Element {
             <img src="/sailing/67c5b98f96d6c8fec9cc166b_image_m2.png" loading="lazy" alt="" className="image-30" />
             <img src="/sailing/67c5b990ee54e5481cbc3767_image_m3.png" loading="lazy" alt="" className="image-31" />
           </div>
-          
-          <div className="text-block-3">This is me somewhere near a sunken <br/> ship in Italy</div>
-          <div className="text-block-5">On a yacht in the <br/>port of Nice <br/>in France</div>
-          <div className="text-block-4">This is us in Turkey <br/>in September</div>
           
           <div className="div-block-25">
             <img src="/sailing/67c19dbc1a447cab52d4c878_IMG_7244.png" loading="lazy" alt="" className="image-8" />
