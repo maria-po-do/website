@@ -22,9 +22,40 @@ export default function SailingPage(): React.JSX.Element {
       loadedScripts.push(script);
     });
     
-    // Добавляем стили для анимаций изображений 
+    // Добавляем стили для курсора 
     const styleScript = document.createElement('style');
     styleScript.textContent = `
+      .cursor-container {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 9999;
+      }
+      
+      .cursor {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 20px;
+        height: 20px;
+        margin-left: -10px;
+        margin-top: -10px;
+        border-radius: 50%;
+        background-color: red;
+        pointer-events: none;
+        z-index: 9999;
+        mix-blend-mode: difference;
+        transition: transform 0.2s ease;
+      }
+      
+      .cursor--hover {
+        transform: scale(3);
+        opacity: 0.5;
+      }
+      
       .image-g {
         transition: transform 0.3s ease;
       }
@@ -32,12 +63,82 @@ export default function SailingPage(): React.JSX.Element {
       .image-g:hover {
         transform: scale(1.07);
       }
+      
+      body, a, * {
+        cursor: none !important;
+      }
     `;
     document.head.appendChild(styleScript);
     
-    // Удаляем старый курсор и все связанные с ним элементы
+    // Создаем контейнер для курсора
+    const cursorContainer = document.createElement('div');
+    cursorContainer.className = 'cursor-container';
+    document.body.appendChild(cursorContainer);
+    
+    // Создаем сам курсор
+    const cursor = document.createElement('div');
+    cursor.className = 'cursor';
+    cursorContainer.appendChild(cursor);
+    
+    // Функция обновления позиции курсора
+    let cursorX = 0;
+    let cursorY = 0;
+    let currentX = 0;
+    let currentY = 0;
+    
+    const updateCursor = () => {
+      const diffX = cursorX - currentX;
+      const diffY = cursorY - currentY;
+      
+      currentX += diffX * 0.1;
+      currentY += diffY * 0.1;
+      
+      cursor.style.left = currentX + 'px';
+      cursor.style.top = currentY + 'px';
+      
+      requestAnimationFrame(updateCursor);
+    };
+    
+    // Запускаем анимацию
+    updateCursor();
+    
+    // Слушаем движение мыши
+    const onMouseMove = (e: MouseEvent) => {
+      cursorX = e.clientX;
+      cursorY = e.clientY;
+    };
+    
+    document.addEventListener('mousemove', onMouseMove);
+    
+    // Обработка наведения на интерактивные элементы
+    const handleMouseEnter = () => {
+      cursor.classList.add('cursor--hover');
+    };
+    
+    const handleMouseLeave = () => {
+      cursor.classList.remove('cursor--hover');
+    };
+    
+    // Добавляем обработчики для интерактивных элементов
+    const interactiveElements = document.querySelectorAll('a, .nav-link-2, .paragraph2, .button, .w-button');
+    interactiveElements.forEach(el => {
+      el.addEventListener('mouseenter', handleMouseEnter);
+      el.addEventListener('mouseleave', handleMouseLeave);
+    });
     
     return () => {
+      // Удаляем все созданные элементы и обработчики
+      if (cursorContainer && cursorContainer.parentNode) {
+        cursorContainer.parentNode.removeChild(cursorContainer);
+      }
+      
+      document.removeEventListener('mousemove', onMouseMove);
+      
+      interactiveElements.forEach(el => {
+        el.removeEventListener('mouseenter', handleMouseEnter);
+        el.removeEventListener('mouseleave', handleMouseLeave);
+      });
+      
       // Удаляем скрипты
       loadedScripts.forEach(script => {
         if (document.body.contains(script)) {
