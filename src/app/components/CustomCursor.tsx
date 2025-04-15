@@ -5,7 +5,7 @@ import React, { useEffect, useRef } from 'react';
 // Цвет курсора
 const CURSOR_COLOR = '#FF5A4B';
 // Значение интерполяции для плавного движения (из оригинального кода)
-const LERP_VALUE = 0.15;
+const LERP_VALUE = 0.075;
 
 // Простая функция линейной интерполяции
 function lerp(start: number, end: number, factor: number): number {

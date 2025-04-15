@@ -5,6 +5,7 @@ import SvgIcons from './svg-icons';
 import CustomCursor from './components/CustomCursor';
 import type { Metadata } from "next";
 import "./main-styles.css";
+import "./cursor.css";
 
 export const metadata: Metadata = {
   title: "Maria Podobrazhnykh",

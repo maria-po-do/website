@@ -4,6 +4,7 @@ import React from 'react';
 import Nav from './components/Nav';
 import Profile from './components/Profile';
 import SailingCTA from './components/SailingCTA';
+import Cursor from './components/Cursor';
 import PortfolioItem from './components/PortfolioItem';
 
 export default function HomePage(): React.JSX.Element {
